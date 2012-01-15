@@ -16,5 +16,7 @@
     "node": "~0.4.x"
   },
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "nodeunit": "0.6.4"
+  }
 }
