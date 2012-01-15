@@ -2,7 +2,7 @@
   "author": "Ben Marvell <madmarv187@gmail.com>",
   "name": "Syringe",
   "description": "Dependency mocking for node modules.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/easternbloc/Syringe",
   "repository": {
     "type": "git",

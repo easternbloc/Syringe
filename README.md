@@ -1,5 +1,8 @@
 Syringe
 =======
+
+[![Build Status](https://secure.travis-ci.org/easternbloc/Syringe.png)](http://travis-ci.org/easternbloc/Syringe)
+
 Using modules in node is easy however unit testing code that requires modules is a little more tricky.  Syringe aims to assist with this problem by providing a handy set of helpers for injection and watching of module methods.
 
 ## Turtles all the way down
