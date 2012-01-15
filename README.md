@@ -17,6 +17,10 @@ To properly unit test your code you need mock all the modules and methods your m
 	  dns.resolve4(urlParsed, callback);
 	};
 
+## Installation
+
+	npm install syringe
+
 In order to unit test this module properly, you need to mock functions in the dns and url modules.  Syringe lets you inject directly over the top of modules or selectively mock the methods in them you're using.
 
 	var dns = require('./dns');
