@@ -27,6 +27,13 @@ module.exports = testCase({
     test.done();
   },
 
+  'trying to inject twice over a method will throw a already injected error': function(test) {
+    utilStub.inject('print', methodToInject);
+    test.throws(function(){ utilStub.inject('print', methodToInject); }, Error, 'Correctly thrown a already injected error');
+    utilStub.restore('print');
+    test.done();
+  },
+
   'forceInject will forcefully inject if a method exists or not': function(test) {
     var testMethodTrigger = false;
     //Ensure the method doesn't exist to start with
