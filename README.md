@@ -1,4 +1,3 @@
-
 Syringe
 =======
 
@@ -17,6 +16,33 @@ To properly unit test your code you need mock all the modules and methods your m
 
 	  dns.resolve4(urlParsed, callback);
 	};
+
+In order to unit test this module properly, you need to mock functions in the dns and url modules.  Syringe lets you inject directly over the top of modules or selectively mock the methods in them you're using.
+
+	var dns = require('./dns');
+	var syringe = require('syringe');
+	
+	var dnsMod = syringe('dns');
+	var urlMod = syringe('url');
+
+	dnsMod.inject('resolve4', function (url, callback) {
+		callback(null, ['127.0.0.1']);
+	});
+
+	urlMod.inject('parse', function() {
+	  return {hostname: 'www.google.com'};
+	});
+
+	urlMod.wrap('parse', function() {
+	  console.log('yep, that function was called from within the require!');
+	});
+
+	dns.resolveAddress('http://www.google.com/', function(err, result) {
+		if (err) {
+			throw new Error(err);
+		}
+		console.log('Resolved dns list:', result);
+	});
 
 ## Installation
 
@@ -49,32 +75,3 @@ To properly unit test your code you need mock all the modules and methods your m
 	module.replaceAll(stubbedUtil);
 #### restoreAll
 	module.restoreAll();
-
-## Example
-
-In order to unit test this module properly, you need to mock functions in the dns and url modules.  Syringe lets you inject directly over the top of modules or selectively mock the methods in them you're using.
-
-	var dns = require('./dns');
-	var syringe = require('syringe');
-	
-	var dnsMod = syringe('dns');
-	var urlMod = syringe('url');
-
-	dnsMod.inject('resolve4', function (url, callback) {
-		callback(null, ['127.0.0.1']);
-	});
-
-	urlMod.inject('parse', function() {
-	  return {hostname: 'www.google.com'};
-	});
-
-	urlMod.wrap('parse', function() {
-	  console.log('yep, that function was called from within the require!');
-	});
-
-	dns.resolveAddress('http://www.google.com/', function(err, result) {
-		if (err) {
-			throw new Error(err);
-		}
-		console.log('Resolved dns list:', result);
-	});
