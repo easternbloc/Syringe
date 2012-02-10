@@ -1,3 +1,4 @@
+
 Syringe
 =======
 
@@ -20,6 +21,36 @@ To properly unit test your code you need mock all the modules and methods your m
 ## Installation
 
 	npm install syringe
+
+## API
+#### inject
+	module.inject('method', function() {
+	  // mock code here
+	});
+#### forceInject
+	module.forceInject('methodThatDoesntExistOnTheAPINatively', function() {
+	  // mock code here
+	});
+#### restore
+	module.restore('method');
+#### wrap
+	module.wrap('method', function() {
+	  // code to run before the method is called
+	  called = true;
+	});
+#### unWrap
+	module.unWrap('method');
+#### replaceAll
+	var stubbedUtil = {
+	      print: function() {
+	        methodCalled = true;
+	      }
+	    };
+	module.replaceAll(stubbedUtil);
+#### restoreAll
+	module.restoreAll();
+
+## Example
 
 In order to unit test this module properly, you need to mock functions in the dns and url modules.  Syringe lets you inject directly over the top of modules or selectively mock the methods in them you're using.
 
